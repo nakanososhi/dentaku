@@ -1,85 +1,59 @@
 const buttons = document.querySelectorAll('button');
 const result = document.querySelector('#result');
 
-const numbers = document.querySelectorAll('.js-number');
-const operators = document.querySelectorAll('.js-operator');
-
-// const tyuui = function(){
-//   alert('wanko')
-// };
-
-// numbers.forEach(function(number){
-//   number.addEventListener('click',tyuui)
-// });
-
-// const suppressZero1 = str => {
-//     //略
-//     return str.replace(/^0+/, '');
-// };
-// console.log( suppressZero1('000001230') );
-
-let zikai = 009;
-
-const suppressZero = str => {
-  return str.replace(/^0+/, '');
-};
-
-// const suppressZero1 = Number(zikai);
-// console.log(suppressZero1);
-
-
 
 let concatText = "";
-// const suppressZero1 = Number(concatText);
 
-// let mr = concatText.slice(-1);
-// let enzanshi = ["+","-","*","/"];
-// let mr = concatText.slice(-1);
 
 function buttonPressed(event) {
   
   const text = event.target.textContent;
-  if(text === "=") {
-  concatText = eval(concatText);
-} else if (text === "AC"){
+  
+  if (text === "AC"){
   concatText = "";
-} else if(((concatText.slice(-1) === "+") || (concatText.slice(-1) === "-") || (concatText.slice(-1) === "*") || (concatText.slice(-1) === "/")) &&
-  ((text === "+") || (text === "-") ||(text === "*") || (text === "/"))){
+  } 
+  else if(concatText ==="" && text ==="00"){
+    concatText = "0";
+  } else if((concatText ==="") && (text ==="+" || text ==="-" || text ==="*" || text ==="/" || text ==="." || text ==="=")){
+    concatText = ""
+  }
+  
+  else if((concatText === "0") && (text ==="0" || text ==="00")){
+    concatText = "0";
+  } 
+  else if((concatText ==="0") && (text ==="1" || text ==="2" || text ==="3" || text ==="4" || 
+  text ==="5" || text ==="6" || text ==="7" || text ==="8" || text ==="9")){
+    concatText = text;
+  } 
+  else if(((concatText.slice(-1) === "+") || (concatText.slice(-1) === "-") || (concatText.slice(-1) === "*") ||
+ (concatText.slice(-1) === "/") || (concatText.slice(-1) ===".")) &&
+  ((text === "+") || (text === "-") ||(text === "*") || (text === "/") || (text ==="."))){
     concatText = concatText.slice(0,-1);
-    concatText = concatText + text;
-  } else if(concatText.slice(-1) === "." && text === ".") {
-    concatText = concatText.slice(0,-1);
-    concatText = concatText + text;
+    concatText += text;
+
+  }
+  else if(((concatText.slice(-1) === "+") || (concatText.slice(-1) === "-") || (concatText.slice(-1) === "*") ||
+  (concatText.slice(-1) === "/")) && (text ==="00")){
+   concatText += "0";
+  } 
+  else if(((concatText.slice(-1) ==="0") && ((concatText.slice(-2,-1) ==="+") || (concatText.slice(-2,-1) ==="-") || 
+  (concatText.slice(-2,-1) ==="*") ||(concatText.slice(-2,-1) ==="/"))) && (text ==="0") || (text ==="00")){
+   concatText = concatText;
+ } 
+  else if(((concatText.slice(-1) ==="0") && ((concatText.slice(-2,-1) ==="+") || (concatText.slice(-2,-1) ==="-") || 
+  (concatText.slice(-2,-1) ==="*") ||(concatText.slice(-2,-1) ==="/"))) && ((text ==="1") || (text ==="2")|| (text ==="3")|| 
+  (text ==="4")|| (text ==="5")|| (text ==="6")|| (text ==="7")|| (text ==="8")|| (text ==="9"))){
+   concatText = concatText.slice(0,-1);
+   concatText += text;
+  }
+  else if(text === "=") {
+  concatText = eval(concatText);
     
   }else{
-  concatText = concatText + text;
+  concatText += text;
 }
-  // const suppressZero = Number(concatText);
-  // result.textContent = suppressZero;
-  result.textContent = concatText
-
- };
-
-
+  result.textContent = concatText;
+  };
  buttons.forEach(function(button) {
    button.addEventListener('click',buttonPressed);
 });
-
-
-// const hyouzi = function() {
-//   alert('kinako');
-// }
-
-// disappear2.addEventListener('click',hyouzi)
-
-
-// const tyuui = function() {
-  // alert('kinako');
-// };
-
-// document.querySelectorAll('button').forEach(function (button) {
-    // button.addEventListener('click', tyuui);
-// });
-
-// addEventListener('click',tyuui);
-
